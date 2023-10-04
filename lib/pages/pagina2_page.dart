@@ -18,7 +18,7 @@ class Pagina2Page extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: usuarioService.existeUsuario
-          ? Text('Nombre: ${ usuarioService.usuario.nombre}')
+          ? Text('Nombre: ${ usuarioService.usuario!.nombre}')
           : const Text('Pagina 2'),
       ),
       body: Center(

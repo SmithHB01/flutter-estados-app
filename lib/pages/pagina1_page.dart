@@ -26,7 +26,7 @@ class Pagina1Page extends StatelessWidget {
         ],
       ),
       body: usuarioService.existeUsuario
-        ? InformacionUsuario( usuarioService.usuario)
+        ? InformacionUsuario( usuarioService.usuario! )
         : const Center( child: Text('No hay usuario seleccionado') ),
 
      floatingActionButton: FloatingActionButton(
