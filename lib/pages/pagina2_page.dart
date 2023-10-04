@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:estados_app/bloc/user/user_bloc.dart';
+import 'package:estados_app/models/user.dart';
+
 
 
 class Pagina2Page extends StatelessWidget {
-  const Pagina2Page({super.key});
-
+  
+  const Pagina2Page({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    final userBloc = BlocProvider.of<UserBloc>(context, listen: false );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pagina 2'),
@@ -17,30 +25,39 @@ class Pagina2Page extends StatelessWidget {
           children: [
 
             MaterialButton(
-              onPressed: () {
-              
-              },
               color: Colors.blue,
-              child: const Text('Establecer usuario', style: TextStyle( color: Colors.white ) ),
+              onPressed: () {
+
+                final newUser = User(
+                  nombre: 'Smith',
+                  edad: 25,
+                  profesiones: [ 'FullStack Developer']
+                );
+
+                // BlocProvider.of<UserBloc>(context, listen: false ).add( ActivateUser(newUser) );
+                userBloc.add( ActivateUser(newUser) );
+              },
+              child: const Text('Establecer Usuario', style: TextStyle( color: Colors.white ) )
             ),
 
             MaterialButton(
-              onPressed: () {
-              
-              },
               color: Colors.blue,
-              child: const Text('Cambiar edad', style: TextStyle( color: Colors.white ) ),
+              onPressed: () {
+                userBloc.add( ChangeUserAge(20) );
+              },
+              child: const Text('Cambiar Edad', style: TextStyle( color: Colors.white ) )
             ),
 
             MaterialButton(
-              onPressed: () {
-              
-              },
               color: Colors.blue,
-              child: const Text('Añadir profesion', style: TextStyle( color: Colors.white ) ),
+              onPressed: () {
+                userBloc.add( AddProfession('Nueva Profesión') );
+              },
+              child: const Text('Añadir Profesion', style: TextStyle( color: Colors.white ) )
             ),
+
           ],
-        ),
+        )
      ),
    );
   }
