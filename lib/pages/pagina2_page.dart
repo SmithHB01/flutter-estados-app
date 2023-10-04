@@ -1,4 +1,11 @@
+
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:estados_app/models/usuario.dart';
+import 'package:estados_app/bloc/usuario/usuario_cubit.dart';
+
 
 
 class Pagina2Page extends StatelessWidget {
@@ -7,6 +14,9 @@ class Pagina2Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final usuarioCubit = context.read<UsuarioCubit>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pagina 2'),
@@ -17,30 +27,41 @@ class Pagina2Page extends StatelessWidget {
           children: [
 
             MaterialButton(
-              onPressed: () {
-              
-              },
               color: Colors.blue,
-              child: const Text('Establecer usuario', style: TextStyle( color: Colors.white ) ),
+              onPressed: () {
+                
+                final newUser = Usuario(
+                  nombre: 'Smith',
+                  edad: 25,
+                  profesiones: [
+                    'FullStack Developer',
+                    'Videojugador Veterano'
+                  ]
+                );
+
+                usuarioCubit.seleccionarUsuario(newUser);
+              },
+              child: const Text('Establecer Usuario', style: TextStyle( color: Colors.white ) )
             ),
 
             MaterialButton(
-              onPressed: () {
-              
-              },
               color: Colors.blue,
-              child: const Text('Cambiar edad', style: TextStyle( color: Colors.white ) ),
+              onPressed: () {
+                usuarioCubit.cambiarEdad(20);
+              },
+              child: const Text('Cambiar Edad', style: TextStyle( color: Colors.white ) )
             ),
 
             MaterialButton(
-              onPressed: () {
-              
-              },
               color: Colors.blue,
-              child: const Text('Añadir profesion', style: TextStyle( color: Colors.white ) ),
+              onPressed: () {
+                usuarioCubit.agregarProfesion();
+              },
+              child: const Text('Añadir Profesion', style: TextStyle( color: Colors.white ) )
             ),
+
           ],
-        ),
+        )
      ),
    );
   }
